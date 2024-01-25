@@ -1,6 +1,29 @@
 #include "Stage.h"
 #include "Engine/Model.h"
 #include"Engine/Camera.h"
+
+const int STAGE_X = 15;
+const int STAGE_Y = 15;
+
+int stage[STAGE_X][STAGE_Y]
+{
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,0,1,1,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,1,1,0,1},
+    {1,0,1,1,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,1,1,00,00,1,1,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,0,0,1,1,1,0,0,00,00,0,0,0,1},
+    {1,0,0,0,0,0,0,0,00,00,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+};
+
 Stage::Stage(GameObject* parent)
 	:GameObject(parent,"Stage")
 {
@@ -23,23 +46,27 @@ void Stage::Update()
 
 void Stage::Draw()
 {
-	for (int x = 0; x < 15; x++)
-	{
-		for (int y = 0; y < 15; y++)
-		{
+    for (int x = 0; x < STAGE_X; x++)
+    {
+        for (int y = 0; y < STAGE_Y; y++)
+        {
+            Transform Trans;
+            Trans.position_ = { 0, 0, 0 };
+            Trans.position_.x = x;
+            Trans.position_.z = y;
 
-			Transform floorTrans;
-	        floorTrans.position_ = { 0,0,0 };
-	        Model::SetTransform(hFloor_, transform_);
-	        Model::Draw(hFloor_);
+            Model::SetTransform(hFloor_, Trans);//floor�̍쐻
+            Model::Draw(hFloor_);
 
-			Transform WallTrans;
-			WallTrans.position_ = { 0,0,0 };
-			Model::SetTransform(hWall_, transform_);
-			Model::Draw(hWall_);
-		}
-	}
 
+            if(x == 0 || x== STAGE_X -1 || y == 0|| y == STAGE_Y -1)
+            {
+                Model::SetTransform(hWall_, Trans);//wall�̍쐬
+                Model::Draw(hWall_);
+            }
+                
+        }
+    }
 }
 
 void Stage::Release()
