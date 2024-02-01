@@ -4,11 +4,15 @@
 /// パックマンを作ってみたい
 /// 　　　　　　sato kotaro
 /// </summary>
+class Stage;
+
 class Player :
     public GameObject
 {
 	int hModel_;
 	float speed_;
+	Stage* pStage_;
+
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

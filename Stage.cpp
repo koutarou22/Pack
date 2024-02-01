@@ -9,27 +9,37 @@ using::std::vector;
 namespace
 {
 
-    const int STAGE_X{ 15 };
-    const int STAGE_Y{ 15 };
+    //const int STAGE_X{ 15 };
+    //const int STAGE_Y{ 15 };
+//
+//    int sArray_[STAGE_X][STAGE_Y]
+//    {
+//      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+//      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+//    };
+}
 
-    int sArray_[STAGE_X][STAGE_Y]
-    {
-      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-    };
+bool Stage::IsWall(int _x, int _y)
+{
+    if (stageData_[_y][_x] == STAGE_OBJ ::WALL )
+
+        return true;
+    else
+
+    return false;
 }
 
 Stage::Stage(GameObject* parent)
@@ -38,17 +48,14 @@ Stage::Stage(GameObject* parent)
     CsvReader csv;
     csv.Load("map.csv");
 
-    int w = csv.GetWidth();
-    int h = csv.GetHeight();
+    //ステージの幅と高さを、ローカル変数に
+    stageWidth_ = csv.GetWidth();
+    stageHeight_ = csv.GetHeight();
 
-    for (int i = 0; i < STAGE_Y; i++)
+
+    for (int j = 0; j < stageHeight_; j++)
     {
-        vector<int> sdata(STAGE_X, 0);
-        stageData_.push_back(sdata);
-    }
-    for (int j = 0; j < STAGE_Y; j++)
-    {
-        for (int i = 0; i < STAGE_X; i++)
+        for (int i = 0; i < stageWidth_; i++)
         {
             stageData_[j][i] = csv.GetValue(i, j);
         }
@@ -98,9 +105,9 @@ void Stage::Draw()
     Transform floorTrans;
     floorTrans.position_ = { 0,0,0 };
 
-    for (int z = 0; z < 15; z++)
+    for (int z = 0; z < stageHeight_; z++)
     {
-        for (int x = 0; x < 15; x++)
+        for (int x = 0; x < stageWidth_; x++)
         {
             floorTrans.position_ = { (float)x, 0, (float)(14 - z) };
 
@@ -122,4 +129,12 @@ void Stage::Draw()
 
 void Stage::Release()
 {
+
+    for (int i = 0; i < stageHeight_; i++)
+    {
+       /* 
+        vector<int> sdata(stageWidth_, 0);*/
+        stageData_.push_back();
+    }
+    stageData_.clear();
 }

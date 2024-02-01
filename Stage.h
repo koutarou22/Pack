@@ -4,13 +4,28 @@
 
 using std::vector;
 
+enum STAGE_OBJ
+{
+	FLOOR,
+	WALL,
+};
+const int STAGE_FLOOR{ 0 };
+const int STAGE_WALL{ 1 };
 class Stage :
 	public GameObject
 {
 	int hFloor_;
 	int hBlock_;
 	vector<vector<int>> stageData_;
+	int stageWidth_, stageHeight_;
+
+	
 public:
+
+	int GetStageWidth() { return stageWidth_; }
+	int GetStageHight() { return stageHeight_; }
+
+	bool IsWall(int _x, int _y);
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
 	Stage(GameObject* parent);

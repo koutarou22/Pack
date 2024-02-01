@@ -2,7 +2,7 @@
 #include"Engine/Model.h"
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
-
+#include"Stage.h"
 
 
 namespace
@@ -11,7 +11,7 @@ namespace
 }
 
 Player::Player(GameObject* parent)
-	:GameObject(parent, "Player"), hModel_(-1),speed_(1.0f)
+	:GameObject(parent, "Player"), hModel_(-1),speed_(PLAYER_SPEED),pStage_(nullptr)
 {
 }
 
@@ -21,6 +21,8 @@ void Player::Initialize()
 	assert(hModel_ >= 0);
 	transform_.position_.x = 0.5;
 	transform_.position_.z = 1.5;
+	pStage_ = (Stage *)FindObject("Stage");
+	//↑これ何キャスト？
 }
 
 void Player::Update()
@@ -60,18 +62,33 @@ void Player::Update()
 		move = XMVECTOR{ 1,0,0,0 };
 		//moveDir = Dir::RIGHT;
 	}
-
-
+	
 	//もうちょっと応用した姿がこちら↓
 	///+++
 
 		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
-		pos = pos + speed_ * move;
-		Debug::Log("(X,Y)=");
+		XMVECTOR posTmp = XMVectorZero();
+        pos = pos + speed_ * move;
+		/*if (map[ty][tx] == STAGE_OBJ::FLOOR)
+		{
+			pos = posTmp
+		}*/
+
+		
+	/*	Debug::Log("(X,Y)=");
 		Debug::Log(XMVectorGetX(pos));
 		Debug::Log(",");
-		Debug::Log(XMVectorGetZ(pos),true);
+		Debug::Log(XMVectorGetZ(pos),true);*/
+		int tx, ty;
+		tx = (int)(XMVectorGetX(pos) +0.5);
+		ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(pos) + 0.5);
 
+		Debug::Log("(iX,iZ)=");
+		Debug::Log(tx);
+		Debug::Log(",");
+		Debug::Log(ty);
+		Debug::Log(":");
+		Debug::Log(pStage_->IsWall(tx, ty),true);
 		
 
 	if(!XMVector3Equal(move,XMVectorZero()))
