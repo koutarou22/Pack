@@ -1,5 +1,9 @@
 #pragma once
 #include "Engine/GameObject.h"
+/// <summary>
+/// パックマンを作ってみたい
+/// 　　　　　　sato kotaro
+/// </summary>
 class Player :
     public GameObject
 {

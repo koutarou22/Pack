@@ -73,6 +73,7 @@ void Stage::Update()
 
 void Stage::Draw()
 {
+    //Ž©•ª‚Å‚â‚Á‚½‚â‚Â
     //for (int x = 0; x < STAGE_X; x++)
     //{
     //    for (int y = 0; y < STAGE_Y; y++)
