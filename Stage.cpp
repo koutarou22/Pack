@@ -134,7 +134,7 @@ void Stage::Release()
     {
        /* 
         vector<int> sdata(stageWidth_, 0);*/
-        stageData_.push_back();
+     /*   stageData_.push_back();*/
     }
     stageData_.clear();
 }

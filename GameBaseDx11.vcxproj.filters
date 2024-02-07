@@ -108,6 +108,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Gauge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -189,6 +190,7 @@
     <ClInclude Include="Player.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Gauge.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

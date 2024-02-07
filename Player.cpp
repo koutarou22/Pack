@@ -11,7 +11,8 @@ namespace
 }
 
 Player::Player(GameObject* parent)
-	:GameObject(parent, "Player"), hModel_(-1),speed_(PLAYER_SPEED),pStage_(nullptr)
+	:GameObject(parent, "Player"), hModel_(-1), speed_(PLAYER_SPEED), pStage_(nullptr),
+	hpCrr_(100), hpMax_(100)
 {
 }
 
@@ -66,50 +67,67 @@ void Player::Update()
 	//Ç‡Ç§ÇøÇÂÇ¡Ç∆âûópÇµÇΩépÇ™Ç±ÇøÇÁÅ´
 	///+++
 
+	int tx, ty;
+
 		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 		XMVECTOR posTmp = XMVectorZero();
         pos = pos + speed_ * move;
-		/*if (map[ty][tx] == STAGE_OBJ::FLOOR)
+
+		tx = (int)(XMVectorGetX(posTmp) + 1.0f);
+		ty = pStage_->GetStageWidth() - (int)((XMVectorGetZ(posTmp)) + 1.0f);
+		
+		if (!(pStage_ ->IsWall(tx,ty)))
 		{
-			pos = posTmp
-		}*/
+			pos = posTmp;
+		}
+		else
+		{
+			hpCrr_ = hpCrr_ - 2;
+			if (hpCrr_)
+			{
+
+			}
+		}
+
 
 		
 	/*	Debug::Log("(X,Y)=");
 		Debug::Log(XMVectorGetX(pos));
 		Debug::Log(",");
-		Debug::Log(XMVectorGetZ(pos),true);*/
-		int tx, ty;
-		tx = (int)(XMVectorGetX(pos) +0.5);
-		ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(pos) + 0.5);
+		//Debug::Log(XMVectorGetZ(pos),true);*/
+		//int tx, ty;
+		//tx = (int)(XMVectorGetX(pos) +0.5);
+		//ty = pStage_->GetStageWidth() - (int)(XMVectorGetZ(pos) + 0.5);
 
-		Debug::Log("(iX,iZ)=");
-		Debug::Log(tx);
-		Debug::Log(",");
-		Debug::Log(ty);
-		Debug::Log(":");
-		Debug::Log(pStage_->IsWall(tx, ty),true);
+		//Debug::Log("(iX,iZ)=");
+		//Debug::Log(tx);
+		//Debug::Log(",");
+		//Debug::Log(ty);
+		//Debug::Log(":");
+		//Debug::Log(pStage_->IsWall(tx, ty),true);
 		
 
 	if(!XMVector3Equal(move,XMVectorZero()))
 	{
 		XMStoreFloat3(&(transform_.position_), pos);
 
+		//XMMATRIX rot = XMMatrixRotationY(XMConvertToRadians(-XM_PIDIV2));
+		//XMVECTOR modifiedVec = XMPlaneTransform(move, rot);
 
-		XMVECTOR vdot = XMVector3Dot(vFront, move);
+		//XMVECTOR vdot = XMVector3Dot(vFront, move);
 
-		//Ç±ÇÍÇÊÇ≠égÇ§ÇÁÇµÇ¢ÇÊ Å´
-		assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
+		////Ç±ÇÍÇÊÇ≠égÇ§ÇÁÇµÇ¢ÇÊ Å´
+		//assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 
-		float angle = acos(XMVectorGetX(vdot));
+	     float angle = atan2(XMVectorGetX(move),XMVectorGetZ(move));
 	 
-		CXMVECTOR vCross = XMVector3Cross(vFront, move);
+	/*	CXMVECTOR vCross = XMVector3Cross(vFront, move);
 		if (XMVectorGetY(vCross) < 0)
 		{
 			angle *=  -1;
-		}
+		}*/
 
-		transform_.rotate_.y = XMConvertToDegrees(angle);
+		//transform_.rotate_.y = XMConvertToDegrees(angle);
 
 
 	//float rotAngle[5]{ 0,-90,180,90,180 };
