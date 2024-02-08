@@ -10,7 +10,7 @@ void Gauge::Initialize()
 {
 	hGaugeBar_ = Image::Load("Life.png");
 	assert(hGaugeBar_ >= 0);
-	hGaugeFrame_ = Image::Load("Gauge.png");
+	hGaugeFrame_ = Image::Load("Gauag.png");
 	assert(hGaugeFrame_ >= 0);
 
 	transform_.position_.x = 0.0f;
@@ -33,8 +33,6 @@ void Gauge::Draw()
 
 	Image::SetTransform(hGaugeFrame_, transform_);
 	Image::Draw(hGaugeFrame_);
-
-
 
 }
 

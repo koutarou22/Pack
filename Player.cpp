@@ -3,11 +3,12 @@
 #include"Engine/Input.h"
 #include"Engine/Debug.h"
 #include"Stage.h"
+#include "Gauge.h"
 
 
 namespace
 {
-	const float PLAYER_SPEED{ 1.0f };
+	const float PLAYER_SPEED{ 0.05f };
 }
 
 Player::Player(GameObject* parent)
@@ -43,22 +44,22 @@ void Player::Update()
 	//int moveDir = Dir::NONE;
 	//move = XMVECTOR{ 0,0,0,0 };
 
-	if (Input::IsKeyDown(DIK_UP)||Input::IsKeyDown(DIK_W))
+	if (Input::IsKey(DIK_UP)||Input::IsKey(DIK_W))
 	{
 		move = XMVECTOR{ 0,0,1,0 };
 		//moveDir = Dir::UP;
 	}
-	if (Input::IsKeyDown(DIK_LEFT)|| Input::IsKeyDown(DIK_A))
+	if (Input::IsKey(DIK_LEFT)|| Input::IsKey(DIK_A))
 	{
 		move = XMVECTOR{ -1,0,0,0 };
 		//moveDir = Dir::LEFT;
 	}
-	if (Input::IsKeyDown(DIK_DOWN)|| Input::IsKeyDown(DIK_S))
+	if (Input::IsKey(DIK_DOWN)|| Input::IsKey(DIK_S))
 	{
 		move = XMVECTOR{ 0,0,-1,0 };
 		//moveDir = Dir::DOWN;
 	}
-	if (Input::IsKeyDown(DIK_RIGHT)|| Input::IsKeyDown(DIK_D))
+	if (Input::IsKey(DIK_RIGHT)|| Input::IsKey(DIK_D))
 	{
 		move = XMVECTOR{ 1,0,0,0 };
 		//moveDir = Dir::RIGHT;
@@ -111,31 +112,35 @@ void Player::Update()
 	{
 		XMStoreFloat3(&(transform_.position_), pos);
 
-		//XMMATRIX rot = XMMatrixRotationY(XMConvertToRadians(-XM_PIDIV2));
-		//XMVECTOR modifiedVec = XMPlaneTransform(move, rot);
+		XMMATRIX rot = XMMatrixRotationY(XMConvertToRadians(-XM_PIDIV2));
+		XMVECTOR modifiedVec = XMPlaneTransform(move, rot);
 
-		//XMVECTOR vdot = XMVector3Dot(vFront, move);
+		XMVECTOR vdot = XMVector3Dot(vFront, move);
 
-		////Ç±ÇÍÇÊÇ≠égÇ§ÇÁÇµÇ¢ÇÊ Å´
-		//assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
+		//Ç±ÇÍÇÊÇ≠égÇ§ÇÁÇµÇ¢ÇÊ Å´
+		assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 
 	     float angle = atan2(XMVectorGetX(move),XMVectorGetZ(move));
 	 
-	/*	CXMVECTOR vCross = XMVector3Cross(vFront, move);
+		CXMVECTOR vCross = XMVector3Cross(vFront, move);
 		if (XMVectorGetY(vCross) < 0)
 		{
 			angle *=  -1;
-		}*/
+		}
 
-		//transform_.rotate_.y = XMConvertToDegrees(angle);
+		transform_.rotate_.y = XMConvertToDegrees(angle);
 
 
 	//float rotAngle[5]{ 0,-90,180,90,180 };
 	//transform_.rotate_.y = rotAngle[moveDir];
 
 	}
-
+	
 	//++++
+
+	Gauge* pGauge = (Gauge*)FindObject("Gauge");
+	pGauge->SetGaugeVal(hpCrr_, hpMax_);
+	
 	
 }
 

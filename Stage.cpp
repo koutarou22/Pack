@@ -48,9 +48,16 @@ Stage::Stage(GameObject* parent)
     CsvReader csv;
     csv.Load("map.csv");
 
-    //ステージの幅と高さを、ローカル変数に
+
     stageWidth_ = csv.GetWidth();
     stageHeight_ = csv.GetHeight();
+
+
+    for (int i = 0; i < stageHeight_; i++)
+    {
+        vector<int> sdata(stageWidth_, 0);
+        stageData_.push_back(sdata);
+    }
 
 
     for (int j = 0; j < stageHeight_; j++)
@@ -61,6 +68,7 @@ Stage::Stage(GameObject* parent)
         }
     }
 }
+
 
 
 void Stage::Initialize()
@@ -132,9 +140,7 @@ void Stage::Release()
 
     for (int i = 0; i < stageHeight_; i++)
     {
-       /* 
-        vector<int> sdata(stageWidth_, 0);*/
-     /*   stageData_.push_back();*/
+        stageData_[i].clear();
     }
     stageData_.clear();
 }
