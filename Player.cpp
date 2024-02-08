@@ -8,7 +8,7 @@
 
 namespace
 {
-	const float PLAYER_SPEED{ 0.05f };
+	const float PLAYER_SPEED{ 0.15 };
 }
 
 Player::Player(GameObject* parent)
@@ -72,7 +72,7 @@ void Player::Update()
 
 		XMVECTOR pos = XMLoadFloat3(&(transform_.position_));
 		XMVECTOR posTmp = XMVectorZero();
-        pos = pos + speed_ * move;
+        posTmp = pos + speed_ * move;
 
 		tx = (int)(XMVectorGetX(posTmp) + 1.0f);
 		ty = pStage_->GetStageWidth() - (int)((XMVectorGetZ(posTmp)) + 1.0f);
@@ -121,12 +121,12 @@ void Player::Update()
 		assert(XMVectorGetX(vdot) <= 1 && XMVectorGetX(vdot) >= -1);
 
 	     float angle = atan2(XMVectorGetX(move),XMVectorGetZ(move));
-	 
+	 /*
 		CXMVECTOR vCross = XMVector3Cross(vFront, move);
 		if (XMVectorGetY(vCross) < 0)
 		{
 			angle *=  -1;
-		}
+		}*/
 
 		transform_.rotate_.y = XMConvertToDegrees(angle);
 
