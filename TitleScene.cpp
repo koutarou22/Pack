@@ -2,6 +2,7 @@
 #include"Engine/SceneManager.h"
 #include"Engine/Input.h"
 #include"Engine/Image.h"
+
 TitleScene::TitleScene(GameObject* parent)
 	:GameObject(parent,"TitleScene,"),hImage_(-1)
 {

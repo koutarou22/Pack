@@ -19,10 +19,8 @@ void PlayScene::Initialize()
 
 void PlayScene::Update()
 {
-    // ゲージのオブジェクトを取得
     Gauge* pGauge = (Gauge*)FindObject("Gauge");
 
-    // ゲージの値が0になったらシーンを切り替える
     if (pGauge != nullptr && pGauge->GetCurrentValue() <= 0)
     {
         SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
@@ -33,9 +31,6 @@ void PlayScene::Update()
     }
 }
 
-
-
-
 void PlayScene::Draw()
 {
 }
@@ -43,4 +38,3 @@ void PlayScene::Draw()
 void PlayScene::Release()
 {
 }
-//
