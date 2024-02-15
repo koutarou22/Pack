@@ -27,6 +27,12 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{fb3e6d5b-f456-46d1-86bb-5b25dfb62236}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{f0d8c8b3-a85b-4934-a407-78e4b8d4ab82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameOver">
+      <UniqueIdentifier>{0d847909-4d0b-4991-85aa-62db4cb021c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\BoxCollider.cpp">
@@ -111,6 +117,12 @@
     <ClCompile Include="Gauge.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScene.cpp">
+      <Filter>GameOver</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -194,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="Gauge.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverScene.h">
+      <Filter>GameOver</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

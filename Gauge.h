@@ -9,6 +9,12 @@ class Gauge :
 	int gaugeMaxVal_;
 	int gaugeCrrVal_;//カレントの値（現在の値）
 public:
+
+	int GetCurrentValue() const
+	{
+		return gaugeCrrVal_;
+	}
+
 	Gauge(GameObject* parent);
 
 	//初期化

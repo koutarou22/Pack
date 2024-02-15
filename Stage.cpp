@@ -46,7 +46,7 @@ Stage::Stage(GameObject* parent)
     :GameObject(parent, "Stage")
 {
     CsvReader csv;
-    csv.Load("map.csv");
+    csv.Load("map1.csv");
 
 
     stageWidth_ = csv.GetWidth();
@@ -78,8 +78,8 @@ void Stage::Initialize()
 	hBlock_= Model::Load("Model\\Wall.fbx");
 	assert(hFloor_ >= 0);
 
-	Camera::SetPosition({ 6.5,10,-5 });
-	Camera::SetTarget({ 6.5,0,5.5 });
+	Camera::SetPosition({ 6.5,20,3 });
+	Camera::SetTarget({ 6.5,0,6.5 });
 }
 
 void Stage::Update()
@@ -88,28 +88,6 @@ void Stage::Update()
 
 void Stage::Draw()
 {
-    //Ž©•ª‚Å‚â‚Á‚½‚â‚Â
-    //for (int x = 0; x < STAGE_X; x++)
-    //{
-    //    for (int y = 0; y < STAGE_Y; y++)
-    //    {
-    //        Transform Trans;
-    //        Trans.position_ = { 0, 0, 0 };
-    //        Trans.position_.x = x;
-    //        Trans.position_.z = y;
-
-    //        Model::SetTransform(hFloor_, Trans);//floor‚Ìì»
-    //        Model::Draw(hFloor_);
-
-    //        if(x == 0 || x== STAGE_X -1 || y == 0|| y == STAGE_Y -1)
-    //        {
-    //            Model::SetTransform(hWall_, Trans);//wall‚Ìì¬
-    //            Model::Draw(hWall_);
-    //        }
-    //            
-    //    }
-    //}
-
     Transform floorTrans;
     floorTrans.position_ = { 0,0,0 };
 
@@ -144,4 +122,3 @@ void Stage::Release()
     }
     stageData_.clear();
 }
-//
